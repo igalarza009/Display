@@ -18,17 +18,6 @@
 	    	});
 	    });
 
-		// function fotoDinamica(im){
-		// 	if (im.files && im.files[0]){
-		// 		var reader = new FileReader();
-		// 		reader.onload = function(){
-		// 			var output = document.getElementById('avatar');
-		// 			output.src = reader.result;
-		// 		};
-		// 		reader.readAsDataURL(im.files[0]);
-		// 	}
-		// }
-
 		function comprobarPasswords(){
 			var pass1 = document.getElementById("password").value;
 			var pass2 = document.getElementById("password2").value;
@@ -69,22 +58,15 @@
 					Apellidos(*): <input type="text" id="apellidos" name="Apellidos" required pattern="[a-zA-Z]+(\s)+[a-zA-Z]+"><br>
 
 					Username(*): <input type="text" id="username" name="Username" required><br> 
-					<div id="comprobarUsername"> <br> </div>
+					<div id="comprobarUsername"> <br> </div><br/>
 
 					Direccion de correo(*): <input type="text" id="correo" name="Correo" required placeholder="you@youremail.com" pattern="[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})"> <br>
-					<div id="comprobarEmail"> <br/> </div>
+					<div id="comprobarEmail"> <br/> </div><br/>
 
 					Contraseña(*): <input type="password" id="password" name="Password" required placeholder="Mínimo 6 caracteres" pattern=".{6,}"> <br>
 
 					Repita la contraseña(*): <input type="password" id="password2" name="Password2" required pattern=".{6,}" onchange="comprobarPasswords()"> <br>
-					<div id="compPasswords"> <br/> </div>
-
-					<!-- Avatar (Opcional): <br/><br/>
-
-					<p> <img src = "avatar.png" id = "avatar" width="150" height="150"> </p>
-					<input type="file" id="imagen" name="imagen" accept="image/*" onchange="fotoDinamica(this)" onload="this.value=null" class="inputfile">
-					<label for="imagen">Examinar...</label> <br/>
-					<br/> -->
+					<div id="compPasswords"> <br/> </div><br/>
 
 					<p align="center">
 						<input type="submit" id="submit" value="REGISTRARSE" name="submit"> 
@@ -196,18 +178,7 @@
 
 		$username = $_POST['Username'];
 
-		// $target_dir = "avatares/";
-
-		// $ext = explode('.', basename($_FILES['imagen']['name']));   // Explode file name from dot(.)
-		// $file_extension = end($ext); // Store extensions in the variable.
-		// $target_file = $target_dir . $username . "." . $file_extension; 
-		
-		// if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
-		// 	$file = basename($_FILES["imagen"]["name"]);
-		// } 
-		// else {
-			$file = "avatar.jpg";
-		// }
+		$file = "avatar.jpg";
 
 		$passEnc = sha1($_POST['Password']);
 

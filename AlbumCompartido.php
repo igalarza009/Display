@@ -14,7 +14,7 @@
 	$id = $_REQUEST['idAlbum'];
 	$result = mysqli_query($link, "select * from album where idAlbum = '$id'" );
 		
-	while ($row = $result->fetch_assoc()) {
+	while ($row = mysqli_fetch_array($result)) {
 		$prop = $row['Username'];
 		$publico = $row['Publico'];
 		if ($usuario == $prop){
@@ -27,8 +27,8 @@
 	
 	$resultComp = mysqli_query($link, "select * from albumComp where idAlbum = '$id'" );
 		
-	while ($row = $resultComp->fetch_assoc()) {
-		$compartidoCom = $row['Username'];
+	while ($row2 = mysqli_fetch_array($resultComp)) {
+		$compartidoCom = $row2['Username'];
 		if ($usuario != $compartidoCom){
 			header("location:LayoutUser.php");
 		}
@@ -57,7 +57,7 @@
   		<li><a href="LayoutUser.php">Inicio</a></li>
   		<li><a href="MisAlbumesUser.php">Mis Álbumes</a></li>
 		<li><a href="MisAlbumesCompartidos.php" class="active">Álbumes Compartidos Conmigo</a></li>
-  		<li class="right"><a href="MiCuenta.php">AVATAR</a></li>
+  		<li class="right"><a href="Logout.php">Cerrar sesión (<?php echo $_SESSION['username']; ?>)</a></li>
 	</ul>
 
 <div style="padding:20px;margin-top:30px;height: 700px">
@@ -82,11 +82,11 @@
 		 echo '<div class=galeria>';
 		 echo '<div id=ImPeques>';
 
-		while ($row = mysqli_fetch_array( $misFotos )) {
-			$imagen = $row['Path'];
-			$nombreIm = $row['NombreImagen'];
-			$idImagen = $row['IdImagen'];
-			$etiquetas = $row['Etiqueta'];
+		while ($row3 = mysqli_fetch_array( $misFotos )) {
+			$imagen = $row3['Path'];
+			$nombreIm = $row3['NombreImagen'];
+			$idImagen = $row3['IdImagen'];
+			$etiquetas = $row3['Etiqueta'];
 
 			//Comprobamos que existe la imagen físicamente
 			if (file_exists($imagen)){

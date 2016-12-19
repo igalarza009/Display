@@ -13,7 +13,7 @@
 	// }
 	
 	$link = mysqli_connect("localhost", "root", "", "display");
-	//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+	// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 			
 	if (isset($_REQUEST['idAlbum']))
 		$_SESSION['idAlbum'] = $_REQUEST['idAlbum'];
@@ -57,7 +57,7 @@
 	    		$('#cancel_modify_desc').show();
 	    	});
 	    	$('#add_imag').click(function(){
-	    		$("#addImagenes").load("FormularioAddImagenes.html");
+	    		$("#addImagenes").load("FormularioAddImagenes.php");
 	    		$('#add_imag').hide();
 	    		$('#cancel_add_imag').show();
 	    	});
@@ -88,9 +88,15 @@
 	    		$('#modify_comp').show();
 	    		$('#cancel_modify_comp').hide();
 	    	});
+
+			$("#ImPeques img").click(function() {
+				var image = $(this).attr('src');
+				window.open(image, '_blank');
+			});
+		
 	    });
 	    	
-		//No funciona: expected expression, got ')' CREO QUE YA ESTÁ CORREGIDO
+		//No funciona: expected expression, got ')' CREO QUE YA ESTÃ CORREGIDO
 		function guardarEtiquetas(idIm){
 			// var idIm = nomIm;
 			var etiq = document.getElementById("etiqueta").value;
@@ -110,15 +116,15 @@
   		<li class=logo><img src="display.png"/></li>
   		<li><a href="LayoutUser.php">Inicio</a></li>
   		<li><a href="MisAlbumesUser.php">Mis Álbumes</a></li>
-		<li><a href="MisAlbumesCompartidos.php">Álbumes Compartidos Conmigo</a></li>
-  		<li class="right"><a href="MiCuenta.php">AVATAR</a></li>
+		<li><a href="MisAlbumesCompartidos.php">Álbumes Compartidos Conmigo</a></li>
+  		<li class="right"><a href="Logout.php">Cerrar sesión (<?php echo $_SESSION['username']; ?>)</a></li>
 	</ul>
 
 <div style="padding:20px;margin-top:30px;height: 700px">
 
 	<?php	
 		$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 
 		$nombre = $_SESSION['nombreAlbum'];
 		$desc = $_SESSION['albumDescr'];
@@ -128,16 +134,17 @@
 
 		echo "<div class='titulo'> <h1>".$nombre;
 		if ($publico=='NO'){
-			echo " (Privado) </h1> </div>";
+			echo " (Privado)";
 		}
 		if ($publico=='SI'){
-			echo " (Publico) </h1> </div>";
+			echo " (Publico)";
 		}
-		if ($publico=='CP'){
-			echo " (Compartido) </h1> </div>";
+		if ($publico=='CM'){
+			echo " (Compartido)";
 		}
+        echo " </h1> </div>";
 
-			echo '<div class="right"> <div class="delete"> <a href="BorrarAlbum.php?idIm=' . $_SESSION['idAlbum']. '"> <img src="bin2.png" width="20" height="20"/>ELIMINAR ALBUM</a> </div></div> <br/>';
+		echo '<div class="right"> <div class="delete"> <a href="BorrarAlbum.php?idAlbum=' . $_SESSION['idAlbum']. '"> <img src="bin2.png" width="20" height="20"/>ELIMINAR ALBUM</a> </div></div> <br/>';
 
 		echo '<div id="modificarVisib"></div>
 			<div class="center">
@@ -151,13 +158,13 @@
 			if ($pub != "SI"){
 				echo '<div id="modificarComp"></div>
 				<div class="center">
-				<button id="modify_comp">MODIFICAR COMP</button> 
-				<button id="cancel_modify_comp">CANCELAR MODIFICAR COMP</button>
+				<button id="modify_comp">LO QUIERO COMPARTIR CON...</button> 
+				<button id="cancel_modify_comp">CANCELAR COMPARTIR</button>
 				</div>';
 			}
 		}
 
-		echo "<div class='descAlbum'><h4> Descripción del ábum: </h4><p>".$desc."</p></div>";	
+		echo "<div class='descAlbum'><h4> Descripción del Álbum: </h4><p>".$desc."</p></div>";	
 		echo '
 			<div id="modificarDesc"></div>
 
@@ -176,11 +183,11 @@
 		
 		$misFotos = mysqli_query($link, "select * from imagen where idAlbum = '$id'" );
 
-		echo '<h4> Imágenes del álbum: </h4>';
+		echo '<h4> Imágenes del Álbum: </h4>';
 		echo '<div id="addImagenes"></div>';
 		echo '<div class="center">
-				<button id="add_imag">AÑADIR IMÁGENES</button> 
-				<button id="cancel_add_imag">CANCELAR AÑADIR IMÁGENES</button>
+				<button id="add_imag">AÑADIR IMÁGENES</button> 
+				<button id="cancel_add_imag">CANCELAR AÑADIR IMÁGENES</button>
 			<br/></div>';
 		echo '<div class=galeria>';
 		echo '<div id=ImPeques>';
@@ -191,31 +198,20 @@
 			$idImagen = $row['IdImagen'];
 			$etiqueta = $row['Etiqueta'];
 			
-			//Comprobamos que existe la imagen físicamente
+			//Comprobamos que existe la imagen fÃ­sicamente
 			if (file_exists($imagen)){
-				echo '<div class=albumUser>';
+				echo '<div class=imagUser>';
 				echo '<div class="imagen">';
 				echo '<img src="'. htmlspecialchars($imagen).'" alt="'.$nombreIm.'" width="100" height="77" />';
 				echo '<div class="nomImagen"> <p>'.$nombreIm.' </p></div>';
 				echo '</div>';
-				echo '<div class="delete"><a href="BorrarImagen.php?idAlbum=' . $idImagen. '" style = "button"> <img src="bin2.png" width="20" height="20"/> BORRAR IMAGEN</a></div>';
-				echo '</div>';
+				echo '<div class="delete"><a class="alb" href="BorrarImagen.php?idIm=' . $idImagen. '" style = "button"> <img src="bin2.png" width="20" height="20"/> BORRAR IMAGEN</a></div>';
 				echo '</div>';
 			}
-
-			// echo '<div class=albumUser>';
-			// 		echo '<div class="album">';
-			// 		echo '<a href="EditarAlbumUser.php?idAlbum=' . $id. '">';
-			// 		echo '<img src="'. htmlspecialchars($imagen) .'" alt="album ' .$nombre. '" width="300" height="200" border="0"/>';
-			// 		echo '</a>';
-			// 		echo '<div class="desc">' .$nombre.'</div>' ;
-			// 		echo '</div>';
-			// 		echo '<div class="delete"><a href="BorrarAlbum.php?idAlbum=' . $id. '" style = "button"> <img src="bin2.png" width="20" height="20"/> ELIMINAR</a></div>';
-			// 		echo '</div>';
 		}
 
 		echo '</div>';
-		// echo'</div>';
+		echo'</div>';
 
 	?>
 	<!-- <div id=ImGrande>
@@ -235,7 +231,7 @@
 
 	if(isset($_POST['albumDesc'])){
 		$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 		
 		$album_desc = $_POST['albumDesc'];
 		
@@ -245,18 +241,18 @@
 		}
 
 		//Nunca llega a ejecutarse
-		// echo "<script type='text/javascript'>
-		// 			alert('Cambios guardados correctamente');
-		// 			window.location.assign(EditarAlbumUser.php?idAlbum=" . $_SESSION['idAlbum']. "); 
-		// 			</script>";
-		$idAlb = $_SESSION['idAlbum'];
-		header("location:EditarAlbumUser.php?idAlbum=$idAlb");
+		echo "<script type='text/javascript'>
+					alert('Cambios guardados correctamente');
+					window.location.assign(EditarAlbumUser.php?idAlbum=" . $_SESSION['idAlbum']. "); 
+					</script>";
+		// $idAlb = $_SESSION['idAlbum'];
+		// header("location:EditarAlbumUser.php?idAlbum=$idAlb");
 	}
 
 	 if(isset($_POST['visibility'])){
 
 		$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 		
 		$vis = $_POST['visibility'];
 
@@ -266,8 +262,13 @@
 		else
 			$pub = 'NO';
 
-		$sql="UPDATE album SET Publico = '$pub' where IdAlbum='$_SESSION[idAlbum]'";
+                $sql="DELETE FROM albumcomp WHERE IdAlbum='$_SESSION[idAlbum]'";
 		if (!mysqli_query($link ,$sql)){
+			die('Error: ' . mysqli_error($link));
+		}
+
+		$sql2="UPDATE album SET Publico = '$pub' where IdAlbum='$_SESSION[idAlbum]'";
+		if (!mysqli_query($link ,$sql2)){
 			die('Error: ' . mysqli_error($link));
 		}
 
@@ -282,7 +283,7 @@
 	
 	 if(isset($_FILES['image']['name'][0])){
 	 	$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 		
 		$user_dir = "albums/" . $_SESSION['username'];
 		$album_name = $_SESSION['nombreAlbum'];
@@ -313,19 +314,20 @@
 			}
 		}
 
-		//Nunca llega a ejecutarse
-		// echo "<script type='text/javascript'>
-		// 			alert('Cambios guardados correctamente'); 
-		// 			</script>";
+		// Nunca llega a ejecutarse
+		echo "<script type='text/javascript'>
+					alert('Cambios guardados correctamente');
+					window.location.assign(EditarAlbumUser.php?idAlbum=" . $_SESSION['idAlbum']. ");  
+					</script>";
 		// header("location:EditarAlbumUser.php?idAlbum=$idAl");
-		header("location:EditarAlbumUser.php?idAlbum=$idAl");
+		// header("location:EditarAlbumUser.php?idAlbum=$idAl");
 		
 	 }
 
 	 if(isset($_POST['usComp'])){
 		if($_POST['usComp'] != ""){
 			$link = mysqli_connect("localhost", "root", "", "display");
-			//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+			// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 			
 			$us = $_POST['usComp'];
 			$idAl = $_SESSION['idAlbum'];
@@ -349,4 +351,4 @@
 <br/><br/><br/>
 
 </body>
-</html>
+</html>	

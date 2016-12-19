@@ -48,31 +48,36 @@
 
 		$passEnc = sha1($pass);
 		
-		$usuarios = mysqli_query($link,"select * from usuario where username='$name' and password='$passEnc' and aceptado='SI'");
+		$usuarios = mysqli_query($link,"select * from usuario where username='$name' and password='$passEnc'");
 		
 		$cont = mysqli_num_rows($usuarios); 
 			
 		if($cont==1){
 
-			$_SESSION['username'] = $name;
-
-			// $horaConex = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-			// $sql="INSERT INTO conexiones(Correo, Hora) VALUES ('$email', '$horaConex' )";
-			// if (!mysqli_query($link ,$sql)){
-			// 	die('Error: ' . mysqli_error($link));
-			// }
+            $usuarioAc = mysqli_query($link,"select * from usuario where username='$name' and password='$passEnc' and Aceptado='SI'");
+            $aceptado = mysqli_num_rows($usuarioAc);
+			
+            if($aceptado ==1){
+            	$_SESSION['username'] = $name;
+                $aceptado = $row['Aceptado'];
 				
-			if ($name == $nameAdmin){
-				$_SESSION['admin'] = "SI";
-				header("location:GestionAlbumesAdmin.php");
-			}
-			else{
-				$_SESSION['admin'] = "NO";
-				header("location:LayoutUser.php");
-			}	
+			    if ($name == $nameAdmin){
+					$_SESSION['admin'] = "SI";
+					header("location:GestionAlbumesAdmin.php");
+			    }
+			    else{
+				   	$_SESSION['admin'] = "NO";
+				   	header("location:LayoutUser.php");
+			    }
+            }
+            else echo "<script type='text/javascript'>
+		 			alert('Su solicitud de acceso se esta procesando, aun no está dado de alta.'); 
+		 			</script>";	
 		}
 		else {
-			echo "<p> <FONT COLOR=RED>Datos incorrectos !!</FONT> </p>";
+			echo "<script type='text/javascript'>
+		 			alert('Datos incorrectos'); 
+		 			</script>";
 		}
 	
 		mysqli_close($link);

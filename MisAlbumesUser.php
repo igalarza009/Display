@@ -1,6 +1,4 @@
-
 <?php
-	//Falta todo lo relacionado con etiquetas y guardar tanto las imágenes como los álbumes en la BD.
 	session_start();
 	if (!isset($_SESSION['username'])){
 		header("location:Login.php");
@@ -21,12 +19,12 @@
 	    $(document).ready(function() {
 	    	$('#cancel_add_album').hide();
 	    	$('#add_album').click(function(){
-	    		$("#añadirAlbum").load("FormularioNuevoAlbum.html");
+	    		$("#aÃ±adirAlbum").load("FormularioNuevoAlbum.html");
 	    		$('#add_album').hide();
 	    		$('#cancel_add_album').show();
 	    	});
 	    	$('#cancel_add_album').click(function(){
-	    		$("#añadirAlbum").html("");
+	    		$("#aÃ±adirAlbum").html("");
 	    		$('#add_album').show();
 	    		$('#cancel_add_album').hide();
 
@@ -41,12 +39,12 @@
   		<li><a href="LayoutUser.php">Inicio</a></li>
   		<li><a href="MisAlbumesUser.php" class="active">Mis Álbumes</a></li>
 		<li><a href="MisAlbumesCompartidos.php">Álbumes Compartidos Conmigo</a></li>
-  		<li class="right"><a href="MiCuenta.php">AVATAR</a></li>
+  		<li class="right"><a href="Logout.php">Cerrar sesión (<?php echo $_SESSION['username']; ?>)</a></li>
 	</ul>
 
 <div style="padding:70px;margin-top:30px;height: 700px">
 
-	<div id="añadirAlbum"> </div>
+	<div id="aÃ±adirAlbum"> </div>
 
 	<div class="center">
 		<button id="add_album">+ AÑADIR ALBUM</button> 
@@ -58,7 +56,7 @@
 
 	<?php
 		$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 			
 		$us = $_SESSION['username'];
 			
@@ -68,13 +66,13 @@
 			$nombre = $row['Nombre'];
 			$id = $row['IdAlbum'];
 
-			//Si existe el álbum físicamente
+			//Si existe el Ã¡lbum fÃ­sicamente
 			if (file_exists("albums/" . $us. "/" . $nombre)){
 				$imagenes = mysqli_query($link, "select * from imagen where IdAlbum='$id'" );
 				$row2 =  mysqli_fetch_array( $imagenes );
 				$imagen = $row2['Path'];
 				
-				//Si existe la imagen físicamente
+				//Si existe la imagen fÃ­sicamente
 				if (file_exists($imagen)){
 					echo '<div class=albumUser>';
 					echo '<div class="album">';
@@ -83,7 +81,7 @@
 					echo '</a>';
 					echo '<div class="desc">' .$nombre.'</div>' ;
 					echo '</div>';
-					echo '<div class="delete"><a href="BorrarAlbum.php?idAlbum=' . $id. '" style = "button"> <img src="bin2.png" width="20" height="20"/> ELIMINAR</a></div>';
+					echo '<div class="delete"><a class="alb" href="BorrarAlbum.php?idAlbum=' . $id. '" style = "button"> <img src="bin2.png" width="20" height="20"/> ELIMINAR</a></div>';
 					echo '</div>';
 				}
 			}
@@ -103,9 +101,9 @@
 		//FALTAN COMPROBACIONES LADO SERVIDOR
 
 		$link = mysqli_connect("localhost", "root", "", "display");
-		//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+		// $link = mysqli_connect("mysql.hostinger.es", "u531741362_admin", "iratiania", "u531741362_dp");
 		
-		// Creamos las carpetas necesarias para el álbum
+		// Creamos las carpetas necesarias para el Ã¡lbum
 		$user_dir = "albums/" . $_SESSION['username'];
 		$album_name = $_REQUEST['albumName'];
 		$target_dir = $user_dir . "/". $album_name;
@@ -119,7 +117,7 @@
 	   		mkdir($target_dir, 0777, true);
 		}
 
-		// Insertamos álbum en la BD
+		// Insertamos Ã¡lbum en la BD
 		if ($_POST['visibility']=="Privada")
 			$pub = "NO";
 		else
@@ -130,7 +128,7 @@
 			die('Error: ' . mysqli_error($link));
 		}
 		
-		// Cogemos el Id del Álbum recién creado
+		// Cogemos el Id del Ãlbum reciÃ©n creado
 		$Album = mysqli_query($link, "select * from album where username = '$_SESSION[username]' and nombre = '$album_name'" );
 		$row = mysqli_fetch_array( $Album );
 		$idAl = $row['IdAlbum'];
@@ -144,7 +142,7 @@
 
 			$nombreIm = $_FILES['image']['name'][$i];
 
-			// Guardamos físicamente la imagen en el path indicado
+			// Guardamos fÃ­sicamente la imagen en el path indicado
 			if (move_uploaded_file($_FILES["image"]["tmp_name"][$i], $target_file)){
 
 				// Insertamos la imagen en la BD			
@@ -164,7 +162,7 @@
 
 		//Nunca llega a salir
 		echo "<script type='text/javascript'>
-			alert('Álbum creado correctamente'); 
+			alert('Ãlbum creado correctamente'); 
 			window.location.assign(MisAlbumesUser.php);
 			</script>";
 		header("location:MisAlbumesUser.php");

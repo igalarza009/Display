@@ -3,20 +3,8 @@
 	if (!isset($_SESSION['username'])){
 		header("location:Login.php");
 	}
-	if ($_SESSION['admin'] =='NO'){
-		header("location:LayoutUser.php");
-	}
-	$link = mysqli_connect("localhost", "root", "", "display");
-	//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
-					
-	$id = $_REQUEST['idAlbum'];
-	$yaComp = "NO";
-				
-	$result = mysqli_query($link, "select * from album where IdAlbum = '$id'" );			
-	$row = mysqli_fetch_array($result);
-	$user = $row['Username'];
-	if($_SESSION['username']!=$user){
-		header("location:LayoutUser.php");
+	if ($_SESSION['admin'] =='SI'){
+		header("location:GestionAlbumesAdmin.php");
 	}
 
 ?>
@@ -69,21 +57,38 @@
 
 <div class="container-nuevo-album">
 
-<form id='nuevoAlbum' action="EditarAlbumUser.php" method="post" enctype="multipart/form-data">
+<form id='nuevoAlbum' action="MisAlbumesUser.php" method="post" enctype="multipart/form-data">
 
-	<div class="header"> <h3> AÑADIR IMÁGENES  <h3> </div>
+	<div class="header"> <h3> NUEVO ÁLBUM  <h3> </div>
 
 	<div class="sep"> </div>
 
 	<div class="inputs">
 			
-	<div class="bold"> Subir más imágenes:<br/><br/> </div>
+	Nombre del álbum: <input type="text" class="peque" name="albumName" id="album_Name"  required /><br/>
+
+	Descripción: <input type="text" name="albumDesc" id="album_Desc"/><br/>
+
+	Visbilidad del álbum: 
+	<select name="visibility" id="album_visibility" class="peque">
+		<option selected value="Privada"> Privada </option>
+		<option value="Publica"> Publica </option>
+	</select>
+	<br/><br/>
+			
+	<div class="bold"> Elegir imágenes:<br/><br/> </div>
 
 	<div id="filediv">
+		<img src="no_image.png" id="imagenSelec" width="210" height="150">
+		<br/>
+		<input name="image[]" type="file" id="image" accept="image/*" ><br/>
+		<!-- <label for="imagen">Examinar...</label> <br/> -->
+		Etiquetar imagen: <input name="tag[]" type="text" id="tag"/><br/>
+		<br/>
 	</div>
 			
 	<input type="button" id="add_more" value="+ Añadir Otra Imagen"/>
-	<input type="submit" value="AÑADIR IMÁGENES" name="submit" id="submit" class="upload"/>
+	<input type="submit" value="CREAR ÁLBUM" name="submit" id="submit" class="upload"/>
 	</div>
 
 </form>

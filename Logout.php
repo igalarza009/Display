@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	unset($_SESSION['email']);
+	unset($_SESSION['username']);
+	unset($_SESSION['idAlbum']);
 	session_destroy();
-	header("location:layout.php");	
-
+	header("location:Layout.php");	
 ?>

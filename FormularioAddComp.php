@@ -1,10 +1,29 @@
 <?php
 	session_start();
+	if (!isset($_SESSION['username'])){
+		header("location:Login.php");
+	}
+	if ($_SESSION['admin'] =='SI'){
+		header("location:GestionAlbumesAdmin.php");
+	}
+	$link = mysqli_connect("localhost", "root", "", "display");
+	//$link = mysqli_connect("mysql.hostinger.es", "u531741362_root", "iratiania", "u531741362_quiz"); No esta cambiado!
+					
+	$id = $_SESSION['idAlbum'];
+	$yaComp = "NO";
+				
+	$result = mysqli_query($link, "select * from album where IdAlbum = '$id'" );			
+	$row = mysqli_fetch_array($result);
+	$user = $row['Username'];
+	if($_SESSION['username']!=$user){
+		header("location:LayoutUser.php");
+	}
+
 ?>
 
 <div class="container-nuevo-album">
 
-<form id='nuevoAlbum' action="EditarAlbumUser.php" method="post" enctype="multipart/form-data">
+<form id='modificarAlbum' action="EditarAlbumUser.php" method="post" enctype="multipart/form-data">
 
 	<div class="header"> <h3> COMPARTIR ALBUM <h3> </div>
 
@@ -44,7 +63,7 @@
 				
 			$id = $_SESSION['idAlbum'];
 			$admin = "Vadillo";
-			$autor = $_SESSION['Username'];
+			$autor = $_SESSION['username'];
 					
 			$usuario = mysqli_query($link, "select * from usuario" );
 			while ($row = mysqli_fetch_array( $usuario )){

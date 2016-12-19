@@ -12,11 +12,19 @@
 	
 	$us = $_REQUEST['username'];
 	$idAlbum = $_SESSION['idAlbum'];
+
+	$album = mysqli_query($link, "select * from album where idAlbum = '$idAlbum'" );
+	$row =  mysqli_fetch_array($album);
+	$user = $row['Username'];
+	if ($user != $_SESSION['username']){
+		header("location:LayoutUser.php");
+	}
 	
 	$compartir = "INSERT INTO albumcomp VALUES ('$idAlbum', '$us')";
 	if (!mysqli_query($link ,$compartir)){
 		die('Error: ' . mysqli_error($link));
 	}
-	
+		
 	header("location:EditarAlbumUser.php?idAlbum=$idAlbum");
+	
 ?>

@@ -37,7 +37,7 @@
   		<li><a href="LayoutUser.php">Inicio</a></li>
   		<li><a href="MisAlbumesUser.php">Mis Álbumes</a></li>
 		<li><a href="MisAlbumesCompartidos.php" class="active">Álbumes Compartidos Conmigo</a></li>
-  		<li class="right"><a href="MiCuenta.php">AVATAR</a></li>
+  		<li class="right"><a href="Logout.php">Cerrar sesión (<?php echo $_SESSION['username']; ?>)</a></li>
 	</ul>
 
 <div style="padding:20px;margin-top:30px;height: 700px">

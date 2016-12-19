@@ -72,7 +72,13 @@ body.fondo{
     margin: 0 auto;
 }
 
-#registro, #login, #nuevoAlbum {
+/*.container-nuevo-album{
+    width: 550px;
+    max-width: 550px;
+    margin: 0 auto;
+}*/
+
+#registro, #login, #nuevoAlbum, #modificarAlbum {
     padding: 0px 25px 25px;
     background: #fff;
     box-shadow: 
@@ -96,6 +102,13 @@ body.fondo{
     margin-bottom: 15px;
 }
 
+#modificarAlbum .header h3{
+    color: #666666;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 #registro .sep, #login .sep {
     height: 1px;
     background: #e8e8e8;
@@ -103,7 +116,7 @@ body.fondo{
     margin: 0px -25px;
 }
 
-#nuevoAlbum .sep{
+#nuevoAlbum .sep, #modificarAlbum .sep{
     height: 1px;
     background: #e8e8e8;
     width: 550px;
@@ -137,6 +150,11 @@ body.fondo{
     background: #fff;
     box-shadow: 0px 0px 0px 2px #8c8c8c, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 );
     outline: none;   
+}
+
+#comprobarUsername, #comprobarEmail, #compPasswords{
+    color: #ff3377;
+    font-size:15px;
 }
 
 #registro .inputs #submit {
@@ -191,38 +209,9 @@ body.fondo{
     height: 150px;
 }
 
-/*#registro .inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-#registro .inputfile + label {
-    background: #808080;
-    padding: 5px 20px;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    position: relative;  
-    float: left;
-    margin-bottom: 20px;
-    margin-left: 125px;
-    cursor: pointer;
-}*/
-
-#nuevoAlbum .sep {
-    height: 1px;
-    background: #e8e8e8;
-    width: 550px;
-    margin: 0px -25px;
-}
-
 #nuevoAlbum .inputs #add_more{  
-    background: #8c8c8c;
-    box-shadow: 0px 2px 10px 2px #b3b3b3;
+    background: #e6004c;
+    box-shadow: 0px 2px 10px 2px #ff99bb;
     border-radius: 8px;
     padding: 15px 20px;
     border: none;
@@ -237,8 +226,25 @@ body.fondo{
     cursor: pointer;
 }
 
-#nuevoAlbum .inputs #add_more:hover{
-    background:#666666;
+#modificarAlbum .inputs #add_more{ 
+    background: #e6004c;
+    box-shadow: 0px 2px 8px 2px #ff99bb;
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 138px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#nuevoAlbum .inputs #add_more:hover, #modificarAlbum .inputs #add_more:hover{
+    background:#b3003b;
 }
 
 #nuevoAlbum .inputs #submit{
@@ -258,14 +264,37 @@ body.fondo{
     cursor: pointer;
 }
 
-#nuevoAlbum .inputs #submit:hover{
+#modificarAlbum .inputs #submit{
+    background: #ff4058;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+    padding: 10px 25px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 170px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#nuevoAlbum .inputs #submit:hover, #modificarAlbum .inputs #submit:hover{
     background:#ff1a38;
 }
 
 div.albumUser{
-    float: left;;
+    float: left;
     display: block;
     margin: 5px;
+}
+
+ div.imagUser{
+    float: left;
+    display: block;
+    margin: 15px;
 }
 
 div.album {
@@ -359,13 +388,20 @@ div.delete a{
     cursor: pointer;
 }
 
-
 div.delete a:hover{
     background:#666666;
-    /*font-weight: bold;*/
 }
 
-div.delete a img{
+
+div.delete a.alb:hover{
+    background:#666666;
+    display: block;
+    text-decoration: underline;
+    /*font-weight: bold;*/
+
+}
+
+div.delete img{
     vertical-align: bottom;
 }
 
@@ -403,14 +439,14 @@ div.delete a img{
 div.imagen {
     background-color: white;
     margin: 10px;
-    border: 2px solid #cccccc;
+    border: 3px solid #cccccc;
     float: left;
     width: 180px;
     display: block;
 }
 
 div.imagen:hover {
-    border: 2px solid #ff99a7;
+    border: 3px solid #ff99a7;
 }
 
 div.imagen:hover div.nomImagen{
@@ -431,6 +467,9 @@ div.nomImagen p{
     font: serif;
     font-size: 14px;
 }
+/*div.nomImagen {
+    padding: 15px;
+}*/
 
 h4{
     text-align: center;     
@@ -452,7 +491,7 @@ div.right{
 }
 
 
-#add_album, #modify_desc, #modify_visib, #add_imag{
+#add_album{
     background:#ff667a;
     margin: 0 auto;
     padding: 10px 20px;
@@ -466,11 +505,43 @@ div.right{
     border-radius: 8px;
 }
 
+ #modify_desc, #modify_visib, #add_imag{
+    background:#ff667a;
+    margin: 0 auto;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+}
+
+#modify_comp{
+    background:#8c8c8c;
+    margin: 0 auto;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0px 2px 10px 2px #8c8c8c;
+    border-radius: 8px;
+}
+
 #add_album:hover, #modify_desc:hover, #modify_visib:hover, #add_imag:hover{
     background:#ff4058;
 }
 
-#cancel_add_album, #cancel_modify_desc, #cancel_modify_visib, #cancel_add_imag{
+#modify_comp:hover{
+    background:#666666;
+}
+
+#cancel_add_album{
     
     margin: 0 auto;
     padding: 10px 20px;
@@ -480,8 +551,8 @@ div.right{
     font-size: 15px;
     font-weight: bold;
     color: white;
-    background:#ff4d4d;
-    box-shadow: 0px 2px 10px 2px #ff7284;
+    background:#8c8c8c;
+    box-shadow: 0px 2px 10px 2px #8c8c8c;
     border-radius: 8px;
 
     /*background: #bfbfbf;
@@ -490,8 +561,22 @@ div.right{
     border-radius: 7px;
 */}
 
-#cancel_add_album:hover, #cancel_modify_desc:hover, #cancel_modify_visib:hover, #cancel_add_imag:hover{
-    background:#ff1a1a;
+ #cancel_modify_desc, #cancel_modify_visib, #cancel_add_imag, #cancel_modify_comp{
+    margin: 0 auto;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background:#8c8c8c;
+    box-shadow: 0px 2px 8px 2px #8c8c8c;
+    border-radius: 8px;
+ }
+
+#cancel_add_album:hover, #cancel_modify_desc:hover, #cancel_modify_visib:hover, #cancel_add_imag:hover, #cancel_modify_comp{
+    background:#666666;
     /*font-weight: bold;*/
 }
 
@@ -529,4 +614,24 @@ td{
 
 #table div.delete a:hover td{
     background: #ffccd3;
+}
+
+#table div.accept a{
+    padding: 8px 12px;
+    text-decoration: none;
+    background: #cc0044;
+    box-shadow: 0px 2px 8px 2px #ffccdd;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#table div.accept a:hover{
+    background: #990033;
+}
+
+#table div.accept img{
+    vertical-align: bottom;
 }

@@ -1,8 +1,10 @@
 <?php
 	session_start();
+	
 	if (!isset($_SESSION['username'])){
 		header("location:Login.php");
 	}
+
 	if ($_SESSION['admin'] =='NO'){
 		header("location:LayoutUser.php");
 	}
@@ -19,12 +21,12 @@
   		<li><a href="GestionAlbumesAdmin.php">Todos los albumes</a></li>	
 		<li><a href="GestionUsersAdmin.php">Todos los usuarios</a></li>	
 		<li><a href="AltaUsersAdmin.php" class="active">Dar de alta</a></li>
-  		<li class="right"><a href="logout.php">CERRAR SESION</a></li>
+  		<li class="right"><a href="logout.php">Cerrar sesión (Admin)</a></li>
 	</ul>
 	
 	<div style="padding:70px;margin-top:30px;height: 700px">
 	
-	<table><tr><th>Username</th><th>Email</th><th>Aceptar solicitud</th></tr>
+	<table id="table"><tr><th>Username</th><th>Email</th><th>Aceptar solicitud</th></tr>
 	
 	<?php
 		$link = mysqli_connect("localhost", "root", "", "display");
@@ -36,9 +38,9 @@
 			$username = $row['Username'];
 			$email = $row['Email'];
 			
-			echo '<tr><th>' . $username . '</th>';
-			echo '<th>' . $email . '</th>';
-			echo '<th><a href="aceptarUsuario.php?username=' . $username. '" style = "button">ACEPTAR</a></th></tr>';			
+			echo '<tr><td>' . $username . '</td>';
+			echo '<td>' . $email . '</td>';
+			echo '<td><div class="accept"> <a href="aceptarUsuario.php?username=' . $username. '" style = "button"> <img src="tick2.png" width="20" height="20"/>ACEPTAR</a></div></td></tr>';			
 		}
 	?>
 	</table>

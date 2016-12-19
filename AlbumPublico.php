@@ -11,7 +11,7 @@
 	$id = $_REQUEST['idAlbum'];
 	$result = mysqli_query($link, "select * from album where idAlbum = '$id'" );
 		
-	while ($row = $result->fetch_assoc()) {
+	while ($row = mysqli_fetch_array($result)) {
 		$_SESSION['nombreAlbum'] = $row['Nombre'];
 		$_SESSION['albumDescr'] = $row['Descripcion'];
 		$publico = $row['Publico'];
@@ -50,7 +50,7 @@
 				echo '<li><a href="LayoutUser.php">Inicio</a></li>
 						<li><a href="MisAlbumesUser.php">Mis Álbumes</a></li>
 						<li><a href="MisAlbumesCompartidos.php">Álbumes Compartidos Conmigo</a></li>
-						<li class="right"><a href="MiCuenta.php">AVATAR</a></li>'; 
+						<li class="right"><a href="Logout.php">Cerrar sesión (' . $_SESSION['username'] .')</a></li>'; 
 			}
 		?>
 	</ul>
