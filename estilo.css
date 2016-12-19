@@ -1,0 +1,532 @@
+@charset "utf-8";
+
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+
+.logo img{
+	height: 40px;
+    width: 130px;
+    padding: 8px 12px 0px 12px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    border-bottom: 1px solid #e6e6e6;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li.right{
+	float:right;
+}
+
+li a:link, a:visited{
+    display: block;
+    text-align: center;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+li a:link:not(.active), a:visited:not(.active){
+    color: #808080;
+}
+
+li a:hover:not(.active) {
+    color: black;
+	border-bottom: 4px solid grey;
+		
+}
+
+.active {
+	color: black;
+    border-bottom: 4px solid #ff4058;
+}
+
+/*CSS REGISTRO/LOGIN*/
+
+body.fondo{
+    /*background-image: linear-gradient(135deg, rgba(250,235,240,1) 0%, rgba(252,214,228,1) 47%, rgba(250,173,194,1) 81%, rgba(252,119,156,1) 100%);*/
+    background-image: linear-gradient(135deg, rgba(226,226,226,1) 0%, rgba(254,254,254,1) 29%, rgba(245,245,245,1) 49%, rgba(219,219,219,1) 87%, rgba(209,209,209,1) 100%);
+}
+
+.container {
+    width: 406px;
+    max-width: 406px;
+    margin: 0 auto;
+}
+
+.container-nuevo-album{
+    width: 550px;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+#registro, #login, #nuevoAlbum {
+    padding: 0px 25px 25px;
+    background: #fff;
+    box-shadow: 
+        0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+        0px 4px 20px rgba( 0,0,0,0.33 );
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: table;
+    position: static;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h3 {
+    color: #ff7284;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#registro .sep, #login .sep {
+    height: 1px;
+    background: #e8e8e8;
+    width: 406px;
+    margin: 0px -25px;
+}
+
+#nuevoAlbum .sep{
+    height: 1px;
+    background: #e8e8e8;
+    width: 550px;
+    margin: 0px -25px;
+}
+
+.inputs {
+    margin-top: 25px;
+    color: #404040;
+}
+
+.inputs input[type=email], input[type=password], input[type=text], select{
+    background: #f5f5f5;
+     -moz-border-radius: 3px;
+     -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 10px;
+    width: 330px;
+    margin-bottom: 20px;
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 );
+    clear: both;
+    font-size: 17px;
+}
+
+.inputs input[type=text].peque, select.peque{
+    width:200px;
+}
+
+.inputs input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, select:focus {
+    background: #fff;
+    box-shadow: 0px 0px 0px 2px #8c8c8c, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 );
+    outline: none;   
+}
+
+#registro .inputs #submit {
+
+    background: #ff4058;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+    padding: 15px 30px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 90px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+#registro .inputs #submit:hover {
+    background:#ff1a38;
+}
+
+#login .inputs #submit {
+
+    background: #ff4058;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+    padding: 15px 30px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 112px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
+}
+
+#login .inputs #submit:hover {
+    background:#ff1a38;
+}
+
+#registro .inputs img{
+    margin-left: 95px;
+    width: 150px;
+    height: 150px;
+}
+
+/*#registro .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#registro .inputfile + label {
+    background: #808080;
+    padding: 5px 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 125px;
+    cursor: pointer;
+}*/
+
+#nuevoAlbum .sep {
+    height: 1px;
+    background: #e8e8e8;
+    width: 550px;
+    margin: 0px -25px;
+}
+
+#nuevoAlbum .inputs #add_more{  
+    background: #8c8c8c;
+    box-shadow: 0px 2px 10px 2px #b3b3b3;
+    border-radius: 8px;
+    padding: 15px 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 138px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#nuevoAlbum .inputs #add_more:hover{
+    background:#666666;
+}
+
+#nuevoAlbum .inputs #submit{
+    background: #ff4058;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+    padding: 15px 30px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;  
+    float: left;
+    margin-left: 148px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#nuevoAlbum .inputs #submit:hover{
+    background:#ff1a38;
+}
+
+div.albumUser{
+    float: left;;
+    display: block;
+    margin: 5px;
+}
+
+div.album {
+    background-color: white;
+    margin: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #cccccc;
+    float: left;
+    width: 180px;
+    display: block;
+    box-shadow: 
+        0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+        0px 4px 20px rgba( 0,0,0,0.33 );
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+div.album:hover {
+    border: 1px solid #ff99a7;
+     box-shadow: 
+        0px 0px 0px 5px #ffb3bd, 
+        0px 4px 20px #ff4058; 
+}
+
+div.album:hover div.desc{
+   font-weight: bold;
+   color:#ff1a38; 
+}
+
+div.album img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    display: block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    font: small-caps 120% serif;
+}
+
+div.autor {
+    text-align: center;
+    font: 100% serif;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+div.titulo h1{
+    text-align: center;
+    color: #ff7284;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+div.descAlbum p{
+    color: #404040;
+    text-align: center;
+    font-size: 20px;
+}
+
+div.descAlbum h4{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+div.delete{
+    text-align: center;
+}
+
+div.delete a{
+    padding: 10px 15px;
+    text-decoration: none;
+    /*background: #bfbfbf;
+    color: black;
+    box-shadow: 0px 2px 10px 2px #bfbfbf;
+    border-radius: 7px;*/
+    background: #8c8c8c;
+    box-shadow: 0px 2px 10px 2px #bfbfbf;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+div.delete a:hover{
+    background:#666666;
+    /*font-weight: bold;*/
+}
+
+div.delete a img{
+    vertical-align: bottom;
+}
+
+.galeria{
+    width: 900px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+#ImGrande{
+    width: 450px;
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+
+#ImGrande h4{
+    text-align: center;
+    font: small-caps bold 100% serif;
+}
+
+#ImGrande p{
+    text-align: center;
+    font: 100% serif;
+}
+
+#ImGrande img{
+    max-width: 450px;
+    height: auto;
+    max-height: 200px;
+}
+
+div.imagen {
+    background-color: white;
+    margin: 10px;
+    border: 2px solid #cccccc;
+    float: left;
+    width: 180px;
+    display: block;
+}
+
+div.imagen:hover {
+    border: 2px solid #ff99a7;
+}
+
+div.imagen:hover div.nomImagen{
+   font-weight: bold;
+   color:#ff1a38; 
+}
+
+div.imagen img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+div.nomImagen p{
+    text-align: center;
+    font: serif;
+    font-size: 14px;
+}
+
+h4{
+    text-align: center;     
+    color: #404040;
+    font: serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+div.center{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+div.right{
+    /*margin-top:30px;*/
+    float:right;
+}
+
+
+#add_album, #modify_desc, #modify_visib, #add_imag{
+    background:#ff667a;
+    margin: 0 auto;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+}
+
+#add_album:hover, #modify_desc:hover, #modify_visib:hover, #add_imag:hover{
+    background:#ff4058;
+}
+
+#cancel_add_album, #cancel_modify_desc, #cancel_modify_visib, #cancel_add_imag{
+    
+    margin: 0 auto;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background:#ff4d4d;
+    box-shadow: 0px 2px 10px 2px #ff7284;
+    border-radius: 8px;
+
+    /*background: #bfbfbf;
+    color: black;
+    box-shadow: 0px 2px 10px 2px #bfbfbf;
+    border-radius: 7px;
+*/}
+
+#cancel_add_album:hover, #cancel_modify_desc:hover, #cancel_modify_visib:hover, #cancel_add_imag:hover{
+    background:#ff1a1a;
+    /*font-weight: bold;*/
+}
+
+/*ESTILO DE LAS TABLAS*/
+
+table{
+	margin: 0 auto;
+}
+
+th{
+	width: 200px; 
+	text-align: center; 
+	font: small-caps bold 120% serif;
+	color: white;
+	background-color: #ff4058; 
+	height: 35px;
+    vertical-align: middle;
+}
+
+td{
+	width: 200px; 
+	text-align: center; 
+	font: 110% serif;
+	color: #ff4058;
+	background-color: white;
+	/*background-color: #FFE6E9;*/	
+	height: 50px;
+    vertical-align: middle;
+}
+
+#table div.delete a{
+    padding: 8px 12px;
+    font-size: 15px;
+}
+
+#table div.delete a:hover td{
+    background: #ffccd3;
+}
